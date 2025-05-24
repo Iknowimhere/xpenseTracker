@@ -1,0 +1,142 @@
+:root {
+  --primary-color: #2d3436;
+  --secondary-color: #636e72;
+  --accent-color: #0984e3;
+  --background-color: #f5f6fa;
+  --danger-color: #d63031;
+  --success-color: #00b894;
+  --border-radius: 8px;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  line-height: 1.6;
+  padding: var(--spacing-lg);
+}
+
+h1, h2 {
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+
+}
+h1{
+  text-align: center;
+}
+button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: opacity 0.2s;
+  width: fit-content;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+form {
+  background: white;
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: var(--spacing-lg);
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+}
+
+label {
+  color: var(--secondary-color);
+  display: block;
+  margin-bottom: var(--spacing-sm);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: var(--spacing-lg);
+}
+
+th, td {
+  text-align: left;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.filters {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.filters span {
+  padding: 8px 16px;
+  background: white;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.filters span:hover {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: var(--spacing-lg) 0;
+}
+
+.landing {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.category-table input {
+  width: 100px;
+}
+
+button[type="submit"] {
+  /* margin-top: var(--spacing-md); */
+  width: fit-content;
+  margin: 0 auto;
+}
