@@ -1,12 +1,15 @@
 import { enqueueSnackbar } from "notistack";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createBudget } from "../slices/budgetSlice.js";
+import { createBudget, clearAllData } from "../slices/budgetSlice.js";
 import { useNavigate } from "react-router-dom";
-const BudgetForm = () => {
+
+const BudgetForm = ({ initialData, isUpdate }) => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const [showUpdateButtons, setShowUpdateButtons] = useState(true);
+  
+  const [formData, setFormData] = useState(initialData || {
     name: '',
     budget: '',
     food: '',
@@ -60,47 +63,75 @@ const BudgetForm = () => {
     });
     navigate('/tracker');
   }
+
+  const handleStartNewTracker = () => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to start a new tracker? This will delete all previous transactions and budget data."
+    );
+
+    if (isConfirmed) {
+      dispatch(clearAllData());
+      setShowUpdateButtons(false);
+      enqueueSnackbar("Started new tracker! Previous data has been cleared.", { variant: "info" });
+    }
+  };
+
+  const handleGoBack = () => {
+    navigate('/tracker');
+  };
+
   return (
-    <div>
-      <h2>Welcome to your own Expense Tracker</h2>
-      <p>Please fill in the form below to start tracking</p>
-      <form>
-        <div>
-          <label htmlFor="description">Enter your name</label>
-          <input type="text" name="name" value={formData.name} onChange={handleChange} />
-        </div>
-        <div>
-          <label htmlFor="budget">Enter your monthly budget</label>
-          <input type="number" name="budget" value={formData.budget} onChange={handleChange} />
-        </div>
-        <div className="category-table">
-            <p>Fill in your monthly categorical budget</p>
-            <table>
-                <thead>
-                    <tr>
-                    <th>Food</th>
-                    <th>Travel</th>
-                    <th>Entertainment</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>
-                        <input type="number" name="food" value={formData.food} onChange={handleChange} />
-                    </td>
-                    <td>
-                        <input type="number" name="travel" value={formData.travel} onChange={handleChange} />
-                    </td>
-                    <td>
-                        <input type="number" name="entertainment" value={formData.entertainment} onChange={handleChange} />
-                    </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <button type="submit" onClick={handleSubmit}>Submit</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <h2>{showUpdateButtons && isUpdate ? 'Update Budget' : 'Create Budget'}</h2>
+      <div>
+        <label htmlFor="description">Enter your name</label>
+        <input type="text" name="name" value={formData.name} onChange={handleChange} />
+      </div>
+      <div>
+        <label htmlFor="budget">Enter your monthly budget</label>
+        <input type="number" name="budget" value={formData.budget} onChange={handleChange} />
+      </div>
+      <div className="category-table">
+          <p>Fill in your monthly categorical budget</p>
+          <table>
+              <thead>
+                  <tr>
+                  <th>Food</th>
+                  <th>Travel</th>
+                  <th>Entertainment</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                  <td>
+                      <input type="number" name="food" value={formData.food} onChange={handleChange} />
+                  </td>
+                  <td>
+                      <input type="number" name="travel" value={formData.travel} onChange={handleChange} />
+                  </td>
+                  <td>
+                      <input type="number" name="entertainment" value={formData.entertainment} onChange={handleChange} />
+                  </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+      <div className="button-group">
+        <button type="submit">
+          {showUpdateButtons && isUpdate ? 'Update' : 'Create'}
+        </button>
+        {showUpdateButtons && isUpdate && (
+          <>
+            <button type="button" onClick={handleStartNewTracker}>
+              Start New Tracker
+            </button>
+            <button type="button" onClick={handleGoBack}>
+              Go Back
+            </button>
+          </>
+        )}
+      </div>
+    </form>
   )
 }
 

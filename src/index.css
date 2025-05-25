@@ -89,7 +89,11 @@ th, td {
   padding: var(--spacing-md);
   border-bottom: 1px solid #ddd;
 }
-
+td.expense-limit{
+  border-radius: 2em;
+  text-align: center;
+  color: white;
+}
 th {
   background-color: var(--accent-color);
   color: white;
@@ -139,4 +143,52 @@ button[type="submit"] {
   /* margin-top: var(--spacing-md); */
   width: fit-content;
   margin: 0 auto;
+}
+
+.status-pill {
+    padding: 4px 12px;
+    border-radius: 16px;
+    color: white;
+    font-size: 0.9rem;
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+}
+
+.expense-limit {
+    text-align: center;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.button-group button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.filter {
+  padding: 0.5rem 1rem;
+  border-radius: 16px;
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  transition: all 0.3s ease;
+}
+
+.filter.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.filter:hover {
+  opacity: 0.8;
 }
